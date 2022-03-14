@@ -25,7 +25,7 @@ namespace server.player
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.transform.position.y + 1.125f == transform.position.y)
+            if (collision.gameObject.transform.position.y + 1.625f - transform.position.y >= 0)
             {
                 _onGround = true;
             }
@@ -33,7 +33,7 @@ namespace server.player
 
         private void OnCollisionExit(Collision other)
         {
-            if (other.gameObject.transform.position.y + 1.125f < transform.position.y)
+            if (other.gameObject.transform.position.y + 1.625f < transform.position.y)
             {
                 _onGround = false;
                 Debug.Log(_onGround);
