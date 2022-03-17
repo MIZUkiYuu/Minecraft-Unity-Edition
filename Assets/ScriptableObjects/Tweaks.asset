@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Tweaks
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  jumpForce: 100
   gravity: 9.8
   maxJumpHeight: 1.25
   sensitivity: 1

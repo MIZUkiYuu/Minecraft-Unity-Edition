@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2218774680154258883}
   - component: {fileID: 8217482140636425180}
   - component: {fileID: 690500199128303404}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: coal_ore
   m_TagString: Block
   m_Icon: {fileID: 0}

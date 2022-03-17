@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6327499884394972653}
   - component: {fileID: 6327499884394972652}
   - component: {fileID: 6327499884394972655}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bedrock
   m_TagString: Block
   m_Icon: {fileID: 0}

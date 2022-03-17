@@ -10,16 +10,21 @@ public class BlockPlacement : MonoBehaviour
     public KeyBinding keyBinding;
     public Tweaks tweaks;
     public Inventory inventory;
+    private TagList _tagList;
+    private GameObject _block;
 
-    TagList tagList;
-    GameObject block;
-
-    Vector3 screenCenterPoint = new Vector3(Screen.width / 2.0f, Screen.height / 2.0f, 0);
+    private readonly Vector3 _screenCenterPoint = new Vector3(Screen.width / 2.0f, Screen.height / 2.0f, 0);
+    private LayerMask _mask;
 
     #region Singleton
     private void Awake()
     {
-        tagList = new TagList();
+        _tagList = new TagList();
+    }
+
+    private void Start()
+    {
+        _mask = LayerMask.GetMask("Block");
     }
 
     #endregion
@@ -29,8 +34,8 @@ public class BlockPlacement : MonoBehaviour
 
         if (Input.GetKeyDown(keyBinding.use))
         {
-            block = inventory.toolbar[inventory.select_item - 1];
-            SetBlock(transform.position, block);
+            _block = inventory.toolbar[inventory.select_item - 1];
+            SetBlock(transform.position, _block);
         }
         if (Input.GetKeyDown(keyBinding.attack))    
         {
@@ -42,8 +47,8 @@ public class BlockPlacement : MonoBehaviour
 
     void SetBlock(Vector3 playerPos, GameObject block)
     {
-        Ray ray = mainCamera.ScreenPointToRay(screenCenterPoint); // screen center
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, tweaks.maxOperateDistance) && WithinOperateRange(playerPos, hitInfo)) {
+        Ray ray = mainCamera.ScreenPointToRay(_screenCenterPoint); // screen center
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, tweaks.maxOperateDistance, _mask) && WithinOperateRange(playerPos, hitInfo)) {
             Vector3 blockPos = hitInfo.collider.transform.position;
             PlaceBlock(blockPos, block, hitInfo);
         }
@@ -51,11 +56,11 @@ public class BlockPlacement : MonoBehaviour
 
     void RemoveBlock(Vector3 playerPos)
     {
-        Ray ray = mainCamera.ScreenPointToRay(screenCenterPoint); // screen center
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, tweaks.maxOperateDistance))
+        Ray ray = mainCamera.ScreenPointToRay(_screenCenterPoint); // screen center
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, tweaks.maxOperateDistance, _mask))
         {
             Vector3 blockPos = hitInfo.collider.transform.position;
-            if (WithinOperateRange(playerPos, hitInfo) && hitInfo.collider.CompareTag(tagList.Block))
+            if (WithinOperateRange(playerPos, hitInfo) && hitInfo.collider.CompareTag(_tagList.Block))
             {
                 Destroy(hitInfo.collider.gameObject);
             }

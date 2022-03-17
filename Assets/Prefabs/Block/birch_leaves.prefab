@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8265161285118296644}
   - component: {fileID: 2194158797221532763}
   - component: {fileID: 7344330788803000491}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: birch_leaves
   m_TagString: Block
   m_Icon: {fileID: 0}

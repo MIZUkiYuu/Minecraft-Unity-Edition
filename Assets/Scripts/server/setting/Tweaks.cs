@@ -7,7 +7,6 @@ namespace server.setting
     {
         [Header("---- Movement ----")]
         public float moveSpeed;
-        public float jumpForce;
         public float gravity;
         public float maxJumpHeight;
 

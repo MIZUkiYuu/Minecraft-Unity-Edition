@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1817362149118354976}
   - component: {fileID: 7371361917610047567}
   - component: {fileID: 584297040977833522}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: birch_planks
   m_TagString: Block
   m_Icon: {fileID: 0}

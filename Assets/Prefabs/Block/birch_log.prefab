@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5162872266362022942}
   - component: {fileID: 6936321541267888340}
   - component: {fileID: 2586217030390832474}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: birch_log
   m_TagString: Block
   m_Icon: {fileID: 0}

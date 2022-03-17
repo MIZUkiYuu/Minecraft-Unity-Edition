@@ -16,7 +16,6 @@ namespace client.UI.inventory
         public Tweaks tweaks;
         public KeyBinding keyBinding;
 
-
         Vector2 frameOriginPos;
         int frameCount = 1;
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8298703310626414048}
   - component: {fileID: 972931645827377003}
   - component: {fileID: 8114906193764606494}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: glass
   m_TagString: Block
   m_Icon: {fileID: 0}

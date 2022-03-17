@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5088227822451392418}
   - component: {fileID: 4173081604433174989}
   - component: {fileID: 6322563564330710960}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: quartz_block
   m_TagString: Block
   m_Icon: {fileID: 0}
