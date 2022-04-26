@@ -26,6 +26,14 @@ public static class Block {
     public static bool IsBlock(int x, int y, int z, BlockType blockType) {
         return Blocks[x, y, z] == blockType;
     }
+    
+    public static int GetTopBlockHeight(int x, int z) {
+        for (int i = 0; i < Tweaks.chunkHeight; i++) {
+            if(Blocks[x, i, z] != BlockType.Air)  continue;
+            return i - 1;
+        }
+        return Tweaks.chunkHeight;
+    }
 }
 
 public enum BlockType

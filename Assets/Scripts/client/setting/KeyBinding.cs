@@ -38,7 +38,7 @@ public class KeyBinding : ScriptableObject
 
     [Header("---- Map ----")]
     public string minimap;
-    public string fullMap;
+    public string worldmap;
 
     [Header("---- Miscellaneous ----")]
     public string advancement;

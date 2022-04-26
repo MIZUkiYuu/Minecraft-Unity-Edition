@@ -16,7 +16,7 @@ MonoBehaviour:
   playerSpawnRadius: 10
   moveSpeed: 1
   gravity: 9.8
-  maxJumpHeight: 6
+  maxJumpHeight: 1.5
   sensitivity: 1
   horizontalSensitivity: 1
   verticalSensitivity: 1

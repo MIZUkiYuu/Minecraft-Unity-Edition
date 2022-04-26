@@ -33,8 +33,8 @@ MonoBehaviour:
   chat: enter
   command: /
   zoomView: 
-  minimap: m
-  fullMap: 
+  minimap: 
+  worldmap: m
   advancement: l
   screenshot: f2
   fullscreen: f11

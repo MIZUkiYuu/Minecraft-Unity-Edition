@@ -35,12 +35,12 @@ namespace client.UI
         private void ShowPlayerPosText()
         {
             _playerPos.y -= 0.625f;
-            playerPosText.text = $"Position: <color=#C33C45>{_playerPos.x:0.000}</color> <color=#23B56E>{_playerPos.y:0.000}</color> <color=#1DA3D2>{_playerPos.z:0.000}</color>";
+            playerPosText.text = $"{_playerPos.x:0.000} , {_playerPos.y:0.000} , {_playerPos.z:0.000}";
         }
         
         private void ShowChunkPosText() {
             Vector2Int chunkPos = new Vector2Int(Mathf.FloorToInt(_playerPos.x) >> 4, Mathf.FloorToInt(_playerPos.z) >> 4);
-            chunkPosText.text = $"Chunk: {chunkPos.x}, {chunkPos.y}";
+            chunkPosText.text = $"{chunkPos.x} , {chunkPos.y}";
         }
 
         private void ShowSpeedText()

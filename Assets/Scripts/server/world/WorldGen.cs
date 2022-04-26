@@ -20,8 +20,8 @@ public class WorldGen : MonoBehaviour {
         _randomX = Random.value * 100;
         _randomZ = Random.value * 100;
 
-        PlayerSpawn();
         WorldBlocksGen();
+        PlayerSpawn();
         GenChunks();
     }
 
@@ -40,9 +40,7 @@ public class WorldGen : MonoBehaviour {
                 int y = GetYFromPerlinNoise(x, z) < 5 ? 5 : GetYFromPerlinNoise(x, z);
                 
                 Block.SetBlock(x, y, z, BlockType.GrassBlock);  // the surface
-
-                SurfaceYPos.Add(y);
-              
+                
                 for (int i = 0; i < tweaks.chunkHeight; i++)
                 {
                     if (i <= 4) Block.SetBlock(x, i, z, BlockType.Bedrock);
@@ -84,10 +82,12 @@ public class WorldGen : MonoBehaviour {
     }
     
     private void PlayerSpawn() {
+        int x = tweaks.playerSpawnPoint.x;
+        int z = tweaks.playerSpawnPoint.y;
         _playerPos = player.transform.position = tweaks.playerSpawnRadius == 0
-            ? new Vector3(tweaks.playerSpawnPoint.x, 60, tweaks.playerSpawnPoint.y)
-            : new Vector3Int((int)(Random.insideUnitCircle.x * tweaks.playerSpawnRadius) + tweaks.playerSpawnPoint.x,
-             60, (int)(Random.insideUnitCircle.y * tweaks.playerSpawnRadius) + tweaks.playerSpawnPoint.y);
+            ? new Vector3(x, Block.GetTopBlockHeight(x, z) + 4, z)
+            : new Vector3Int((int)(Random.insideUnitCircle.x * tweaks.playerSpawnRadius) + x,
+                Block.GetTopBlockHeight(x, z) + 4, (int)(Random.insideUnitCircle.y * tweaks.playerSpawnRadius) + z);
     }
 
     private Vector2Int ChunkPosPlayerIn() { // the lower-left point of chunk which player is in

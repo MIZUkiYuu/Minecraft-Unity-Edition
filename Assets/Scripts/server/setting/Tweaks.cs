@@ -9,7 +9,6 @@ public class Tweaks : ScriptableObject {
     
     [Header("---- Movement ----")]
     public float moveSpeed;
-    public float gravity;
     public float maxJumpHeight;
 
     [Header("---- ViewRotate ----")]
