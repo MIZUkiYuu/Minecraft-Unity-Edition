@@ -1,3 +1,4 @@
+using System;
 using server.setting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,17 +9,24 @@ namespace client.UI
     {
         public Camera mainCamera;
         public Tweaks tweaks;
-        public Text blockName;
         public GameObject player;
-
-        public Text blockPosText;
-        public Text speedText;
+        public Text blockName;
+        
+        [Space]
         public Text playerPosText;
+        public Text chunkPosText;
+        public Text speedText;
         public Text resolutionText;
+        public Text blockPosText;
+
+        private Vector3 _playerPos;
 
         private void Update()
         {
+            _playerPos = player.transform.position;
+            
             ShowPlayerPosText();
+            ShowChunkPosText();
             ShowSpeedText();
             ShowResolution();
             ShowBlockPosText();
@@ -26,12 +34,13 @@ namespace client.UI
 
         private void ShowPlayerPosText()
         {
-            Vector3 playerPos = player.transform.position;
-            playerPos.y -= 0.625f;
-            playerPosText.text = "Position: " +
-                                 "<color=#C33C45>" + playerPos.x.ToString("0.000") + "</color> " +
-                                 "<color=#23B56E>" + playerPos.y.ToString("0.000") + "</color> " +
-                                 "<color=#1DA3D2>" + playerPos.z.ToString("0.000") + "</color>";
+            _playerPos.y -= 0.625f;
+            playerPosText.text = $"Position: <color=#C33C45>{_playerPos.x:0.000}</color> <color=#23B56E>{_playerPos.y:0.000}</color> <color=#1DA3D2>{_playerPos.z:0.000}</color>";
+        }
+        
+        private void ShowChunkPosText() {
+            Vector2Int chunkPos = new Vector2Int(Mathf.FloorToInt(_playerPos.x) >> 4, Mathf.FloorToInt(_playerPos.z) >> 4);
+            chunkPosText.text = $"Chunk: {chunkPos.x}, {chunkPos.y}";
         }
 
         private void ShowSpeedText()
@@ -57,11 +66,9 @@ namespace client.UI
                 blockPosText.gameObject.SetActive(true);
                 blockName.gameObject.SetActive(true);
 
-                Vector3 blockPos = hitInfo.transform.position;
+                Vector3 blockPos = hitInfo.point;
 
-                blockPosText.text = "< " + ((int) (blockPos.x - 0.5f)) + " , " +
-                                    ((int) (blockPos.y + 0.5f)) + " , " +
-                                    ((int) (blockPos.z - 0.5f)) + " >";
+                blockPosText.text = $"< {Math.Ceiling(blockPos.x)} , {Math.Ceiling(blockPos.y)} , {Math.Ceiling(blockPos.z)} >";
                 blockName.text = "Block: " + hitInfo.transform.gameObject.name.Replace("(Clone)", "");
             }
             else

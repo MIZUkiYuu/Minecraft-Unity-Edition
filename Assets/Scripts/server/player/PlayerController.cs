@@ -24,7 +24,7 @@ namespace server.player
             _jumpCheckBoxHalfExtents = new Vector3(0.299f, 0.03f, 0.299f);  //box : 0.6 0.2 0.6
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             Cursor.lockState = CursorLockMode.Locked; //mouse lock
             ViewRotation();
@@ -100,7 +100,7 @@ namespace server.player
 
         private void ViewRotation()
         {
-            float sensitivity = 100.0f * tweaks.sensitivity * Time.fixedDeltaTime;
+            float sensitivity = 200.0f * tweaks.sensitivity * Time.deltaTime;
             float horizontalRotate = Input.GetAxis("Mouse X") * sensitivity * tweaks.horizontalSensitivity;
             float verticalRotate = Input.GetAxis("Mouse Y") * sensitivity * tweaks.verticalSensitivity;
 

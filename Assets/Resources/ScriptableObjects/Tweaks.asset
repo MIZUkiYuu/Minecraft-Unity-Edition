@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd0a67d3d06bff4382495e14029f75e, type: 3}
+  m_Name: Tweaks
+  m_EditorClassIdentifier: 
+  playerSpawnPoint: {x: 8, y: 8}
+  playerSpawnRadius: 10
+  moveSpeed: 1
+  gravity: 9.8
+  maxJumpHeight: 6
+  sensitivity: 1
+  horizontalSensitivity: 1
+  verticalSensitivity: 1
+  maxOperateDistance: 6
+  seed: 1
+  maxWorldSize: 21
+  chunkLength: 16
+  chunkHeight: 64
+  viewDistance: 10
+  relief: 100
+  terrainHeightMax: 64
+  xScale: 1
+  zScale: 1
