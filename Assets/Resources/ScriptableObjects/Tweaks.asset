@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd0a67d3d06bff4382495e14029f75e, type: 3}
   m_Name: Tweaks
   m_EditorClassIdentifier: 
-  playerSpawnPoint: {x: 8, y: 8}
-  playerSpawnRadius: 10
+  playerSpawnPoint: {x: 0, y: 0}
+  playerSpawnRadius: 0
   moveSpeed: 1
-  gravity: 9.8
-  maxJumpHeight: 1.5
+  maxJumpHeight: 1.25
   sensitivity: 1
   horizontalSensitivity: 1
   verticalSensitivity: 1

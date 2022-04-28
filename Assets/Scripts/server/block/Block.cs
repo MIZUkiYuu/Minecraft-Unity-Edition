@@ -8,6 +8,11 @@ public static class Block {
     private static readonly RangeInt IsWood = new ((int) BlockType.AcaciaLog, (int) BlockType.StrippedSpruceWood);
     private static readonly RangeInt IsLeaf = new ((int) BlockType.AcaciaLeaves, (int) BlockType.SpruceLeaves);
 
+    public static void SetBlock(Vector3 blockPos, BlockType blockType)
+    {
+        Blocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z] = blockType;
+    }
+    
     public static void SetBlock(int x, int y, int z, BlockType blockType)
     {
         Blocks[x, y, z] = blockType;
@@ -17,6 +22,10 @@ public static class Block {
     {
         if (blockMask.start < (int)Blocks[x, y, z] && (int)Blocks[x, y, z] < blockMask.end) return;
         Blocks[x, y, z] = blockType;
+    }
+    
+    public static BlockType GetBlock(Vector3 blockPos) {
+        return Blocks[(int)blockPos.x, (int)blockPos.y, (int)blockPos.z];
     }
     
     public static BlockType GetBlock(int x, int y, int z) {

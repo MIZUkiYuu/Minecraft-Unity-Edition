@@ -1,86 +1,143 @@
 using System;
+using System.Collections.Generic;
 using server.setting;
 using UnityEngine;
 
-namespace server.player
+public class PlayerController : MonoBehaviour
 {
-    public class PlayerController : MonoBehaviour
+    public Tweaks tweaks;
+    public KeyBinding keyBinding;
+    public Camera mainCamera;
+    public GameObject worldGen;
+
+    private Rigidbody _rigidbody;
+    private WorldGen _world;
+    // move
+    private float _verticalVelocity;
+    private Vector3 _tempMoveVelocity;
+    private Vector3 _velocity;
+    private float _moveSpeed; 
+    // jump
+    private bool _onGround;
+    private bool _onCollisionStay;
+    private Vector3 _jumpCheckBoxCenter;
+    private readonly Vector3 _jumpCheckBoxHalfExtents= new(0.299f, 0.03f, 0.299f); //box : 0.6 0.06 0.6;
+    // viewRotation
+    private float _yRotation;
+    // block placement
+    private Ray _ray;
+    private static bool _canRayCast;
+    private static Vector3 _blockLookingPos;
+    private Vector3 _blockLookingPosInArray;
+    private Vector2Int _chunkNum;
+    private int _chunksInArray;
+    
+    private void Start()
     {
+        _rigidbody = GetComponent<Rigidbody>();
+        _world = worldGen.GetComponent<WorldGen>();
+    }
 
-        public Tweaks tweaks;
-        public KeyBinding keyBinding;
-        public Camera mainCamera;
-        private Rigidbody _rigidbody;
+    private void FixedUpdate()
+    {
+        Movement();
+    }
+    
+    private void OnCollisionStay() {
+        _onCollisionStay = true;
+    } 
+    
+    private void OnCollisionExit() {
+        _onCollisionStay = false;
+    }
 
-        private float _yRotation;
-        private bool _onGround;
-        private Vector3 _jumpCheckBoxCenter;
-        private Vector3 _jumpCheckBoxHalfExtents;
-        private float _verticalVelocity;
-        private Vector3 _tempMoveVelocity;
-        private Vector3 _velocity;
-        private float _moveSpeed; 
-        private void Start()
-        {
-            _rigidbody = GetComponent<Rigidbody>();
-            _jumpCheckBoxHalfExtents = new Vector3(0.299f, 0.03f, 0.299f);  //box : 0.6 0.2 0.6
+    private void Update() {
+        Cursor.lockState = CursorLockMode.Locked; //mouse lock
+        ViewRotation();
+        BlockPlacement();
+    }
+    
+    private void Movement() {
+
+        if (Input.GetKey(keyBinding.sprint)) {
+            _moveSpeed = 1.3f * 5.0f * tweaks.moveSpeed; // player sprint speed: 6.265
+        }else{
+            _moveSpeed = 5.0f * tweaks.moveSpeed; // player walk speed: 4.765
         }
-
         
-        private void FixedUpdate()
-        {
-            Movement();
+        _velocity = Input.GetAxis("MoveZ") * transform.forward * _moveSpeed + Input.GetAxis("MoveX") * transform.right * _moveSpeed;
+
+        if (!_onGround && _onCollisionStay) {
+            _velocity.x = _velocity.z = 0;
+        }
+        
+        _jumpCheckBoxCenter = transform.position - new Vector3(0, 1.6f, 0);
+        _onGround = Physics.CheckBox(_jumpCheckBoxCenter, _jumpCheckBoxHalfExtents, Quaternion.Euler(Vector3.zero), LayerMask.GetMask("Block"));
+        
+        switch (_onGround) {
+            case true:
+                _velocity += 6f * Input.GetAxis("Jump") * Vector3.up * tweaks.maxJumpHeight;
+                break;
+            case false:
+                _velocity.y += _rigidbody.velocity.y;
+                break;
+        }
+        _rigidbody.velocity = _velocity;
+        _velocity = Vector3.zero;
+    }
+
+    private void ViewRotation()
+    {
+        float sensitivity = 1.5f * tweaks.sensitivity;
+        float horizontalRotate = Input.GetAxis("Mouse X") * sensitivity * tweaks.horizontalSensitivity;
+        float verticalRotate = Input.GetAxis("Mouse Y") * sensitivity * tweaks.verticalSensitivity;
+
+        _yRotation -= verticalRotate;
+        _yRotation = Mathf.Clamp(_yRotation, -90, 90);
+
+        transform.Rotate(Vector3.up * horizontalRotate);
+        mainCamera.transform.localRotation = Quaternion.Euler(_yRotation, 0, 0);
+    }
+
+    private void BlockPlacement() {
+        _ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2.0f, Screen.height / 2.0f, 0));
+        if (Physics.Raycast(_ray, out RaycastHit hitInfo, tweaks.maxOperateDistance)) {
+            _canRayCast = true;
+            _blockLookingPos.x = hitInfo.normal.Equals(Vector3.right) ? Mathf.Floor(hitInfo.point.x) - 1 : Mathf.Floor(hitInfo.point.x);
+            _blockLookingPos.y = Mathf.Clamp(hitInfo.normal.Equals(Vector3.up) ? Mathf.Floor(hitInfo.point.y) - 1 : Mathf.Floor(hitInfo.point.y), 0, tweaks.chunkHeight - 1);
+            _blockLookingPos.z = hitInfo.normal.Equals(Vector3.forward) ? Mathf.Floor(hitInfo.point.z) - 1 : Mathf.Floor(hitInfo.point.z);
+            _blockLookingPosInArray = _blockLookingPos + new Vector3(tweaks.viewDistance * tweaks.chunkLength, 0, tweaks.viewDistance * tweaks.chunkLength);
+        }
+        else {
+            _canRayCast = false;
+            return;
         }
 
-        private void Update() {
-            Cursor.lockState = CursorLockMode.Locked; //mouse lock
-            ViewRotation();
+        // place block
+        if(Input.GetKeyDown(keyBinding.use)){
+            Block.SetBlock(_blockLookingPosInArray + hitInfo.normal, BlockType.BirchPlanks);
+            RefreshChunkMesh(_blockLookingPos + hitInfo.normal);
         }
-
-        private void Movement() {
-            //Move
-
-            if (Input.GetKey(keyBinding.sprint)) {
-                _moveSpeed = 1.3f * 5.0f * tweaks.moveSpeed; // player sprint speed: 6.265
-            }else{
-                _moveSpeed = 5.0f * tweaks.moveSpeed; // player walk speed: 4.765
-            }
-            
-            _velocity = Input.GetAxis("MoveZ") * transform.forward * _moveSpeed + Input.GetAxis("MoveX") * transform.right * _moveSpeed;
-
-            _jumpCheckBoxCenter = transform.position - new Vector3(0, 1.6f, 0);
-            _onGround = Physics.CheckBox(_jumpCheckBoxCenter, _jumpCheckBoxHalfExtents, Quaternion.Euler(Vector3.zero), LayerMask.GetMask("Block"));
-            
-            switch (_onGround) {
-                case true:
-                    _velocity += 4f * Input.GetAxis("Jump") * Vector3.up * tweaks.maxJumpHeight;
-                    break;
-                case false:
-                    _velocity.y += _rigidbody.velocity.y;
-                    break;
-            }
-            _rigidbody.velocity = _velocity;
-            _velocity = Vector3.zero;
+        // remove block
+        if (Input.GetKeyDown(keyBinding.attack)) {
+            Block.SetBlock(_blockLookingPosInArray, BlockType.Air);
+            RefreshChunkMesh(_blockLookingPos);
         }
+    }
 
-        private void ViewRotation()
-        {
-            float sensitivity = 2.0f * tweaks.sensitivity;
-            float horizontalRotate = Input.GetAxis("Mouse X") * sensitivity * tweaks.horizontalSensitivity;
-            float verticalRotate = Input.GetAxis("Mouse Y") * sensitivity * tweaks.verticalSensitivity;
+    private void RefreshChunkMesh(Vector3 blockPos) {
+        _chunkNum = new Vector2Int((int)blockPos.x >> 4, (int)blockPos.z >> 4); // get the chunk number of x,y which target block is in
+        _chunksInArray = (2 * tweaks.viewDistance + 1) * (_chunkNum.x + tweaks.viewDistance) + _chunkNum.y + tweaks.viewDistance;
+        _world.chunks[_chunksInArray].numX = _chunkNum.x;
+        _world.chunks[_chunksInArray].numZ = _chunkNum.y;
+        _world.chunks[_chunksInArray].RefreshMesh(); // chunk array = 20 * (x + 10) + (y + 10)
+    }
+    
+    public static Vector3 GetBlockLookingPos() {
+        return _blockLookingPos;
+    }
 
-            _yRotation -= verticalRotate;
-            _yRotation = Mathf.Clamp(_yRotation, -90, 90);
-
-            transform.Rotate(Vector3.up * horizontalRotate);
-            mainCamera.transform.localRotation = Quaternion.Euler(_yRotation, 0, 0);
-        }
-
-        private bool HasAnyMoveInput()
-        {
-            return Input.GetKey(keyBinding.moveForward) || Input.GetKey(keyBinding.moveBack) ||
-                   Input.GetKey(keyBinding.moveLeft) || Input.GetKey(keyBinding.moveRight) ||
-                   Input.GetKey(keyBinding.moveUp) || Input.GetKey(keyBinding.moveDown) || Input.GetKey(keyBinding.jump);
-        }
+    public static bool CanRayCast() {
+        return _canRayCast;
     }
 }

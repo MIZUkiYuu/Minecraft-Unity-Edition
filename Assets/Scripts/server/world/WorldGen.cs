@@ -9,7 +9,7 @@ public class WorldGen : MonoBehaviour {
     public static List<int> SurfaceYPos = new();
     public Tweaks tweaks;
     
-    [SerializeField]private List<Chunk> chunks = new();
+    [SerializeField]public List<Chunk> chunks = new();
     private float _randomX, _randomZ;   // random parameter of Perlin Noise
     private float _relief;
     private Vector3 _playerPos;
@@ -87,7 +87,7 @@ public class WorldGen : MonoBehaviour {
         _playerPos = player.transform.position = tweaks.playerSpawnRadius == 0
             ? new Vector3(x, Block.GetTopBlockHeight(x, z) + 4, z)
             : new Vector3Int((int)(Random.insideUnitCircle.x * tweaks.playerSpawnRadius) + x,
-                Block.GetTopBlockHeight(x, z) + 4, (int)(Random.insideUnitCircle.y * tweaks.playerSpawnRadius) + z);
+                Block.GetTopBlockHeight(x, z) + 3, (int)(Random.insideUnitCircle.y * tweaks.playerSpawnRadius) + z);
     }
 
     private Vector2Int ChunkPosPlayerIn() { // the lower-left point of chunk which player is in
