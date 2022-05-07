@@ -40,7 +40,7 @@ public static class Block {
     
     public static int GetTopBlockHeight(int x, int z) {
         for (int i = 5; i < Tweaks.chunkHeight; i++) {
-            if(Blocks[x, i, z] != BlockType.Air)  continue;
+            if(Blocks[x + Tweaks.viewDistance * Tweaks.chunkLength, i, z + Tweaks.viewDistance * Tweaks.chunkLength] != BlockType.GrassBlock)  continue;
             return i - 1;
         }
         return Tweaks.chunkHeight;

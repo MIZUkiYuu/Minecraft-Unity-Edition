@@ -15194,7 +15194,6 @@ MonoBehaviour:
   keyBinding: {fileID: 11400000, guid: ae931fdcbc7e7a045815bdc0c2424812, type: 2}
   mapCamera: {fileID: 2105690656}
   player: {fileID: 919132149492529558}
-  playerHeadIcon: {fileID: 0}
   mapInfo: {fileID: 1553786424}
   minimapRT: {fileID: 8400000, guid: c79df643e7620764eb32238807d43cb9, type: 2}
   worldmapRT: {fileID: 8400000, guid: 88838e5b20f27c5498dc2baf1acca8db, type: 2}
@@ -18365,7 +18364,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0
   far clip plane: 200
   field of view: 29
   orthographic: 1

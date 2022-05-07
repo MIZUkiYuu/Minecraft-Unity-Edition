@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd0a67d3d06bff4382495e14029f75e, type: 3}
   m_Name: Tweaks
   m_EditorClassIdentifier: 
-  playerSpawnPoint: {x: 1, y: 1}
+  playerSpawnPoint: {x: 10, y: 10}
   playerSpawnRadius: 0
   moveSpeed: 1
   maxJumpHeight: 1.25
@@ -23,9 +23,9 @@ MonoBehaviour:
   seed: 1
   maxWorldSize: 3
   chunkLength: 16
-  chunkHeight: 64
+  chunkHeight: 256
   viewDistance: 1
-  relief: 80
-  terrainHeightMax: 64
+  relief: 100
+  terrainHeightMax: 128
   xScale: 1
   zScale: 1

@@ -84,10 +84,8 @@ public class WorldGen : MonoBehaviour {
     private void PlayerSpawn() {
         int x = tweaks.playerSpawnPoint.x;
         int z = tweaks.playerSpawnPoint.y;
-        _playerPos = player.transform.position = tweaks.playerSpawnRadius == 0
-            ? new Vector3(x - 0.5f, Block.GetTopBlockHeight(x, z) + 5, z - 0.5f)
-            : new Vector3Int((int)(Random.insideUnitCircle.x * tweaks.playerSpawnRadius) + x,
-                Block.GetTopBlockHeight(x, z) + 5, (int)(Random.insideUnitCircle.y * tweaks.playerSpawnRadius) + z);
+        _playerPos = player.transform.position = tweaks.playerSpawnRadius == 0 ? new Vector3(x - 0.5f, Block.GetTopBlockHeight(x, z) + 4, z - 0.5f)
+            : new Vector3Int((int)(Random.insideUnitCircle.x * tweaks.playerSpawnRadius) + x, Block.GetTopBlockHeight(x, z) + 4, (int)(Random.insideUnitCircle.y * tweaks.playerSpawnRadius) + z);
     }
 
     private Vector2Int ChunkPosPlayerIn() { // the lower-left point of chunk which player is in

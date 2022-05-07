@@ -6,7 +6,6 @@ public class MapDisplay : MonoBehaviour {
     [Space] 
     public Camera mapCamera;
     public GameObject player;
-    public RectTransform playerHeadIcon;
     public RectTransform mapInfo;
     public RenderTexture minimapRT;
     public RenderTexture worldmapRT;
@@ -39,7 +38,7 @@ public class MapDisplay : MonoBehaviour {
         minimap.SetActive(false);
         mapCamera.orthographicSize = 100;
         mapCamera.targetTexture = worldmapRT;
-        mapInfo.anchoredPosition = new Vector3(0 , 690, 0);
+        mapInfo.anchoredPosition = new Vector2(0 , 690);
         mapInfo.sizeDelta = new Vector2(700, 100);
         worldmap.SetActive(true);
     }
@@ -48,7 +47,7 @@ public class MapDisplay : MonoBehaviour {
         worldmap.SetActive(false);
         mapCamera.orthographicSize = 50;
         mapCamera.targetTexture = minimapRT;
-        mapInfo.anchoredPosition = new Vector3(0 , 290, 0);
+        mapInfo.anchoredPosition = new Vector2(0 , 290);
         mapInfo.sizeDelta = new Vector2(300, 100);
         minimap.SetActive(true);
     }

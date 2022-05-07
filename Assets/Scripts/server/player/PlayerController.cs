@@ -18,8 +18,11 @@ public class PlayerController : MonoBehaviour
     private float _moveSpeed; 
     // jump
     private bool _onGround;
+    private bool _inFloatingMode;
+    private bool _pressKeyOnce;
     private bool _onCollisionStay;
     private Vector3 _jumpCheckBoxCenter;
+    private float _currentTime;
     private readonly Vector3 _jumpCheckBoxHalfExtents= new(0.299f, 0.03f, 0.299f); //box : 0.6 0.06 0.6;
     // viewRotation
     private float _yRotation;
@@ -35,6 +38,9 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _world = worldGen.GetComponent<WorldGen>();
+
+        _inFloatingMode = false;
+        _pressKeyOnce = false;
     }
 
     private void FixedUpdate()
@@ -51,6 +57,20 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update() {
+        // press the JUMP key twice to float
+        if (Input.GetKeyDown(keyBinding.jump)) {
+            if (!_pressKeyOnce) {
+                _currentTime = Time.realtimeSinceStartup;
+                _pressKeyOnce = true;
+            }
+            else {
+                _inFloatingMode = !_inFloatingMode;
+                _pressKeyOnce = false;
+            }
+        }
+        if (Time.realtimeSinceStartup - _currentTime > 0.5f) {
+            _pressKeyOnce = false;
+        }
         
         ViewRotation();
         BlockPlacement();
@@ -65,21 +85,36 @@ public class PlayerController : MonoBehaviour
         
         _velocity = Input.GetAxis("MoveZ") * transform.forward * _moveSpeed + Input.GetAxis("MoveX") * transform.right * _moveSpeed;
 
-        if (!_onGround && _onCollisionStay) {
+        if (!_onGround && _onCollisionStay && !_inFloatingMode) {
             _velocity.x = _velocity.z = 0;
         }
         
         _jumpCheckBoxCenter = transform.position - new Vector3(0, 1.6f, 0);
         _onGround = Physics.CheckBox(_jumpCheckBoxCenter, _jumpCheckBoxHalfExtents, Quaternion.Euler(Vector3.zero), LayerMask.GetMask("Block"));
-        
-        switch (_onGround) {
-            case true:
-                _velocity += 6f * Input.GetAxis("Jump") * Vector3.up * tweaks.maxJumpHeight;
-                break;
-            case false:
-                _velocity.y += _rigidbody.velocity.y;
-                break;
+
+        if (_onGround) {
+            _inFloatingMode = false;
         }
+        
+        _rigidbody.useGravity = _inFloatingMode switch {
+            true => false,
+            false => true
+        };
+
+        if (_inFloatingMode) {
+            _velocity += 6f * Input.GetAxis("Jump") * Vector3.up;
+        }
+        else {
+            switch (_onGround) {
+                case true:
+                    _velocity += 6f * Input.GetAxis("Jump") * Vector3.up * tweaks.maxJumpHeight;
+                    break;
+                case false:
+                    _velocity.y += _rigidbody.velocity.y;
+                    break;
+            }
+        }
+
         _rigidbody.velocity = _velocity;
         _velocity = Vector3.zero;
     }
