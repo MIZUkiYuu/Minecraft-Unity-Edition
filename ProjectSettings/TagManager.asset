@@ -16,7 +16,7 @@ TagManager:
   - Player
   - MainCamPostP
   - MapCamPostP
-  - 
+  - BlockPreview
   - 
   - 
   - 
@@ -42,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 935333193
     locked: 0

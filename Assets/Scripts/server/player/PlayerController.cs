@@ -1,14 +1,13 @@
-using System;
-using System.Collections.Generic;
-using server.setting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public Tweaks tweaks;
     public KeyBinding keyBinding;
+    public Inventory inventory;
     public Camera mainCamera;
     public GameObject worldGen;
+    public SoundsController soundsController;
 
     private Rigidbody _rigidbody;
     private WorldGen _world;
@@ -28,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private Ray _ray;
     private static bool _canRayCast;
     private static Vector3 _blockLookingPos;
-    private Vector3 _blockLookingPosInArray;
+    private static Vector3 _blockLookingPosInArray;
     private Vector2Int _chunkNum;
     private int _chunksInArray;
     
@@ -43,7 +42,7 @@ public class PlayerController : MonoBehaviour
         Movement();
     }
     
-    private void OnCollisionStay() {
+    private void OnCollisionStay(Collision other) {
         _onCollisionStay = true;
     } 
     
@@ -52,13 +51,12 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update() {
-        Cursor.lockState = CursorLockMode.Locked; //mouse lock
+        
         ViewRotation();
         BlockPlacement();
     }
     
     private void Movement() {
-
         if (Input.GetKey(keyBinding.sprint)) {
             _moveSpeed = 1.3f * 5.0f * tweaks.moveSpeed; // player sprint speed: 6.265
         }else{
@@ -88,6 +86,8 @@ public class PlayerController : MonoBehaviour
 
     private void ViewRotation()
     {
+        if(inventory.isGUIOpen)  return;
+        
         float sensitivity = 1.5f * tweaks.sensitivity;
         float horizontalRotate = Input.GetAxis("Mouse X") * sensitivity * tweaks.horizontalSensitivity;
         float verticalRotate = Input.GetAxis("Mouse Y") * sensitivity * tweaks.verticalSensitivity;
@@ -100,6 +100,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void BlockPlacement() {
+        if(inventory.isGUIOpen)  return;
+        
         _ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2.0f, Screen.height / 2.0f, 0));
         if (Physics.Raycast(_ray, out RaycastHit hitInfo, tweaks.maxOperateDistance)) {
             _canRayCast = true;
@@ -114,12 +116,14 @@ public class PlayerController : MonoBehaviour
         }
 
         // place block
-        if(Input.GetKeyDown(keyBinding.use)){
-            Block.SetBlock(_blockLookingPosInArray + hitInfo.normal, BlockType.BirchPlanks);
+        if(Input.GetKeyDown(keyBinding.use) && CanPlaceBlock(_blockLookingPosInArray)){
+            soundsController.PlayAudioClip(inventory.toolbar[inventory.toolbarSelectedItem], _blockLookingPos + hitInfo.normal, PlayerBehaviour.Place);
+            Block.SetBlock(_blockLookingPosInArray + hitInfo.normal, inventory.toolbar[inventory.toolbarSelectedItem]);
             RefreshChunkMesh(_blockLookingPos + hitInfo.normal);
         }
-        // remove block
+        // dig block
         if (Input.GetKeyDown(keyBinding.attack)) {
+            soundsController.PlayAudioClip(GetBlockLookingType(), _blockLookingPos, PlayerBehaviour.Dig);
             Block.SetBlock(_blockLookingPosInArray, BlockType.Air);
             RefreshChunkMesh(_blockLookingPos);
         }
@@ -132,12 +136,29 @@ public class PlayerController : MonoBehaviour
         _world.chunks[_chunksInArray].numZ = _chunkNum.y;
         _world.chunks[_chunksInArray].RefreshMesh(); // chunk array = 20 * (x + 10) + (y + 10)
     }
+
+    private bool CanPlaceBlock(Vector3 blockPos) {
+        if (Block.IsBlockInRange(inventory.toolbar[inventory.toolbarSelectedItem], Block.CanPlant)) {
+            return Plant.CanPlant((int)blockPos.x, (int)blockPos.y, (int)blockPos.z);
+        }
+        return true;
+    }
     
     public static Vector3 GetBlockLookingPos() {
         return _blockLookingPos;
     }
 
+    public static BlockType GetBlockLookingType() {
+        return Block.GetBlock(_blockLookingPosInArray);
+    }
+    
     public static bool CanRayCast() {
         return _canRayCast;
     }
+    
+}
+
+public enum PlayerBehaviour{
+    Dig, Place,
+    Walk, Jump, Idle,
 }

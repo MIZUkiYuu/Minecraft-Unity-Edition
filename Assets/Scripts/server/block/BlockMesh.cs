@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum TileType
-{
+public enum TileType {
     CubeSide, CubeTop, CubeDown
 }
 
-public class BlockMesh
-{
+public class BlockMesh {
     private int _side, _top, _down;
     private float _xPos, _yPos;
     private const float Tiles = 16.0f;   // 16 * 16 tiles in one block_texture.png
@@ -22,15 +20,13 @@ public class BlockMesh
     public bool OpaqueTop;
     public bool OpaqueDown;
     public bool CrossTileType;
-    private BlockMesh(int side, bool opaque = true, bool cross = false)
-    {
+    private BlockMesh(int side, bool opaque = true, bool cross = false) {
         _side = _top = _down = side;    // The six faces are of the same texture
         OpaqueSide = OpaqueTop = OpaqueDown = opaque;
         CrossTileType = cross;
     }
 
-    private BlockMesh(int side, int top, bool opaqueSide = true, bool opaqueTop = true, bool cross = false)
-    {
+    private BlockMesh(int side, int top, bool opaqueSide = true, bool opaqueTop = true, bool cross = false) {
         _side = side;
         _top = _down = top;
         OpaqueSide = opaqueSide;
@@ -38,8 +34,7 @@ public class BlockMesh
         CrossTileType = cross;
     }
 
-    private BlockMesh(int side, int top, int down, bool opaqueSide = true, bool opaqueTop = true, bool opaqueDown = true)
-    {
+    private BlockMesh(int side, int top, int down, bool opaqueSide = true, bool opaqueTop = true, bool opaqueDown = true) {
         _side = side;
         _top = top;
         _down = down;
@@ -48,48 +43,39 @@ public class BlockMesh
         OpaqueDown = opaqueDown;
     }
 
-    private Vector2[] CubeTilePos(int num)
-    {
+    private Vector2[] CubeTilePos(int num) { // UV
         _xPos = (int)(num / 16) / Tiles;
         _yPos = num % 16 / Tiles;
-        return new Vector2[4]
-        {
+        return new Vector2[4] {
             new Vector2(_xPos + Width - Crop, _yPos + Width - Crop), new Vector2(_xPos + Crop, _yPos + Width - Crop),
             new Vector2(_xPos + Width - Crop, _yPos + Crop), new Vector2(_xPos + Crop, _yPos + Crop)
         };
     }
     
-    public static Vector3[] CubeVertices(Vector3 blockPos, Direction direction)
-    {
+    public static Vector3[] CubeVertices(Vector3 blockPos, Direction direction) {
         return direction switch
         {
-            Direction.Top => new[]
-            {
+            Direction.Top => new[] {
                 blockPos + new Vector3(1, 1, 1), blockPos + new Vector3(0, 1, 1), 
                 blockPos + new Vector3(1, 1, 0), blockPos + new Vector3(0, 1, 0)
             },
-            Direction.Down => new[]
-            {
+            Direction.Down => new[] {
                 blockPos + new Vector3(0, 0, 1), blockPos + new Vector3(1, 0, 1), 
                 blockPos + new Vector3(0, 0, 0), blockPos + new Vector3(1, 0, 0)
             },
-            Direction.Front => new[]
-            {
+            Direction.Front => new[] {
                 blockPos + new Vector3(0, 1, 1), blockPos + new Vector3(1, 1, 1), 
                 blockPos + new Vector3(0, 0, 1), blockPos + new Vector3(1, 0, 1)
             },
-            Direction.Back => new[]
-            {
+            Direction.Back => new[] {
                 blockPos + new Vector3(1, 1, 0), blockPos + new Vector3(0, 1, 0), 
                 blockPos + new Vector3(1, 0, 0), blockPos + new Vector3(0, 0, 0)
             },
-            Direction.Right => new[]
-            {
+            Direction.Right => new[] {
                 blockPos + new Vector3(1, 1, 1), blockPos + new Vector3(1, 1, 0), 
                 blockPos + new Vector3(1, 0, 1), blockPos + new Vector3(1, 0, 0)
             },
-            Direction.Left => new[]
-            {
+            Direction.Left => new[] {
                 blockPos + new Vector3(0, 1, 0), blockPos + new Vector3(0, 1, 1), 
                 blockPos + new Vector3(0, 0, 0), blockPos + new Vector3(0, 0, 1)
             },
@@ -97,10 +83,8 @@ public class BlockMesh
         };
     }
 
-    public static Vector3[] CrossVertices(Vector3 blockPos)
-    {
-        return new[]
-        {
+    public static Vector3[] CrossVertices(Vector3 blockPos) {
+        return new[] {
             // south-east
             blockPos + new Vector3(CrossPointB, 1-Crop, CrossPointB), blockPos + new Vector3(CrossPointS, 1-Crop, CrossPointS),
             blockPos + new Vector3(CrossPointB, 0-Crop, CrossPointB), blockPos + new Vector3(CrossPointS, 0-Crop, CrossPointS),
@@ -112,37 +96,29 @@ public class BlockMesh
             blockPos + new Vector3(CrossPointS, 0-Crop, CrossPointS), blockPos + new Vector3(CrossPointB, 0-Crop, CrossPointB),
             //south-west
             blockPos + new Vector3(CrossPointB, 1-Crop, CrossPointS), blockPos + new Vector3(CrossPointS, 1-Crop, CrossPointB),
-            blockPos + new Vector3(CrossPointB, 0-Crop, CrossPointS), blockPos + new Vector3(CrossPointS, 0-Crop, CrossPointB),
+            blockPos + new Vector3(CrossPointB, 0-Crop, CrossPointS), blockPos + new Vector3(CrossPointS, 0-Crop, CrossPointB)
         };
     }
 
-    public static int[] Triangles(int faces, int nums)
-    {
+    public static int[] Triangles(int faces, int nums) {
         List<int> tri = new List<int>();
-        for (int i = 0; i < faces; i++)
-        {
+        for (int i = 0; i < faces; i++) {
             tri.AddRange(new[] {nums + i * 4, nums + i * 4 + 3, nums + i * 4 + 1, nums + i * 4, nums + i * 4 + 2, nums + i * 4 + 3});
         }
         return tri.ToArray();
     }
 
-    public Vector2[] UVs(TileType to = TileType.CubeSide, bool twoSide = false)
-    {
-        switch (to)
-        {
-            case TileType.CubeTop:
-                return CubeTilePos(_top);
-            case TileType.CubeDown:
-                return CubeTilePos(_down);
-            default:
-                return CubeTilePos(_side);
-        }
+    public Vector2[] UVs(TileType to = TileType.CubeSide, bool twoSide = false) {
+        return to switch {
+            TileType.CubeTop => CubeTilePos(_top),
+            TileType.CubeDown => CubeTilePos(_down),
+            _ => CubeTilePos(_side)
+        };
     }
     
 
-    public static readonly Dictionary<BlockType, BlockMesh> BlockTilePos = new()
-    {
-        {BlockType.Air, new BlockMesh(25, false)},
+    public static readonly Dictionary<BlockType, BlockMesh> BlockTilePos = new() {
+        {BlockType.Air, new BlockMesh(255, false)},
         {BlockType.GrassBlock, new BlockMesh(0,1,2)},
         {BlockType.Dirt, new BlockMesh(2)},
         {BlockType.Grass, new BlockMesh(3, false ,true)},
@@ -213,23 +189,23 @@ public class BlockMesh
         {BlockType.JungleLeaves, new BlockMesh(76, false)},
         {BlockType.OakLeaves, new BlockMesh(77, false)},
         {BlockType.SpruceLeaves, new BlockMesh(78, false)},
-        {BlockType.Glass, new BlockMesh(79)},
-        {BlockType.BlackStainedGlass, new BlockMesh(80)},
-        {BlockType.BlueStainedGlass, new BlockMesh(81)},
-        {BlockType.BrownStainedGlass, new BlockMesh(82)},
-        {BlockType.CyanStainedGlass, new BlockMesh(83)},
-        {BlockType.GrayStainedGlass, new BlockMesh(84)},
-        {BlockType.GreenStainedGlass, new BlockMesh(85)},
-        {BlockType.LightBlueStainedGlass, new BlockMesh(86)},
-        {BlockType.LightGrayStainedGlass, new BlockMesh(87)},
-        {BlockType.LimeStainedGlass, new BlockMesh(88)},
-        {BlockType.MagentaStainedGlass, new BlockMesh(89)},
-        {BlockType.OrangeStainedGlass, new BlockMesh(90)},
-        {BlockType.PinkStainedGlass, new BlockMesh(91)},
-        {BlockType.PurpleStainedGlass, new BlockMesh(92)},
-        {BlockType.RedStainedGlass, new BlockMesh(93)},
-        {BlockType.WhiteStainedGlass, new BlockMesh(94)},
-        {BlockType.YellowStainedGlass, new BlockMesh(95)},
+        {BlockType.Glass, new BlockMesh(79, false)},
+        {BlockType.BlackStainedGlass, new BlockMesh(80, false)},
+        {BlockType.BlueStainedGlass, new BlockMesh(81, false)},
+        {BlockType.BrownStainedGlass, new BlockMesh(82, false)},
+        {BlockType.CyanStainedGlass, new BlockMesh(83, false)},
+        {BlockType.GrayStainedGlass, new BlockMesh(84, false)},
+        {BlockType.GreenStainedGlass, new BlockMesh(85, false)},
+        {BlockType.LightBlueStainedGlass, new BlockMesh(86, false)},
+        {BlockType.LightGrayStainedGlass, new BlockMesh(87, false)},
+        {BlockType.LimeStainedGlass, new BlockMesh(88, false)},
+        {BlockType.MagentaStainedGlass, new BlockMesh(89, false)},
+        {BlockType.OrangeStainedGlass, new BlockMesh(90, false)},
+        {BlockType.PinkStainedGlass, new BlockMesh(91, false)},
+        {BlockType.PurpleStainedGlass, new BlockMesh(92, false)},
+        {BlockType.RedStainedGlass, new BlockMesh(93, false)},
+        {BlockType.WhiteStainedGlass, new BlockMesh(94, false)},
+        {BlockType.YellowStainedGlass, new BlockMesh(95, false)},
         {BlockType.QuartzBlock, new BlockMesh(96)},
         {BlockType.SmoothQuartzBlock, new BlockMesh(97)},
         {BlockType.QuartzPillar, new BlockMesh(98, 99)},

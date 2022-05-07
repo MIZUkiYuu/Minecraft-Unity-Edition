@@ -183,7 +183,8 @@ public class Chunk : MonoBehaviour
     }
     
     private Vector3[] GetCrossVertices(int x, int y, int z) {
-        return BlockMesh.CrossVertices(new Vector3(x - _dx + Random.Range(-0.3f, 0.3f), y, z - _dz + Random.Range(-0.3f, 0.3f)));
+        // return BlockMesh.CrossVertices(new Vector3(x - _dx + Random.Range(-0.3f, 0.3f), y, z - _dz + Random.Range(-0.3f, 0.3f)));
+        return BlockMesh.CrossVertices(new Vector3(x - _dx, y, z - _dz));
     }
     
     private Vector2[] GetUVs(int x, int y, int z, TileType tileType = TileType.CubeSide) {

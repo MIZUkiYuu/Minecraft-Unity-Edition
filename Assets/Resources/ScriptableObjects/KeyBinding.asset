@@ -24,7 +24,7 @@ MonoBehaviour:
   attack: mouse 0
   use: mouse 1
   pick: mouse 2
-  dropItem: 
+  dropItem: q
   inventory: e
   swapItem: 
   saveToolbar: 

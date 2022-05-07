@@ -18,7 +18,7 @@ public static class Plant {
       TreesGen(x, y, z);
    }
 
-   private static bool CanPlant(int x, int y, int z)
+   public static bool CanPlant(int x, int y, int z)
    {
       return Block.IsBlock(x, y, z, BlockType.GrassBlock) || Block.IsBlock(x, y, z, BlockType.Sand) ||
              Block.IsBlock(x, y, z, BlockType.Dirt);

@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class DebugHUD : MonoBehaviour
 {
-    public Camera mainCamera;
     public Tweaks tweaks;
     public KeyBinding keyBinding;
     public GameObject player;
-    
-    [Space]
+
+    [Space] 
+    public GameObject debugText;
     public Text blockName;
     public Text playerPosText;
     public Text chunkPosText;
@@ -21,20 +21,25 @@ public class DebugHUD : MonoBehaviour
     private Vector3 _blockPos;
     private Vector2Int _chunkPos;
 
-    private void FixedUpdate()
+    private void Start() {
+        debugText.SetActive(false);
+    }
+
+    private void Update()
     {
-        if (gameObject.activeSelf) {
+        if (debugText.activeSelf) {
             _playerPos = player.transform.position;
             ShowPlayerPosText();
             ShowChunkPosText();
             ShowSpeedText();
             ShowResolution();
-            ShowBlockPosText();
-            if(Input.GetKeyDown(keyBinding.debugHUD))  gameObject.SetActive(false); 
+            if(Input.GetKeyDown(keyBinding.debugHUD))  debugText.SetActive(false); 
         }
         else {
-            if(Input.GetKeyDown(keyBinding.debugHUD))  gameObject.SetActive(true);
+            if(Input.GetKeyDown(keyBinding.debugHUD))  debugText.SetActive(true);
         }
+        
+        ShowBlockPosText();
     }
 
     private void ShowPlayerPosText()

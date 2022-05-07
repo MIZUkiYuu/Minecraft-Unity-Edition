@@ -5,8 +5,10 @@ public static class Block {
 
     private static BlockType[,,] Blocks = new BlockType[Tweaks.maxWorldSize * Tweaks.chunkLength, Tweaks.chunkHeight, Tweaks.maxWorldSize * Tweaks.chunkLength];
     
-    private static readonly RangeInt IsWood = new ((int) BlockType.AcaciaLog, (int) BlockType.StrippedSpruceWood);
-    private static readonly RangeInt IsLeaf = new ((int) BlockType.AcaciaLeaves, (int) BlockType.SpruceLeaves);
+    public static readonly RangeInt OfWood = new ((int) BlockType.AcaciaPlanks, 24);
+    public static readonly RangeInt OfLeaf = new ((int) BlockType.AcaciaLeaves, 6);
+    public static readonly RangeInt OfGlass = new ((int) BlockType.Glass, 17);
+    public static readonly RangeInt CanPlant = new ((int) BlockType.Grass, 11);
 
     public static void SetBlock(Vector3 blockPos, BlockType blockType)
     {
@@ -37,21 +39,26 @@ public static class Block {
     }
     
     public static int GetTopBlockHeight(int x, int z) {
-        for (int i = 0; i < Tweaks.chunkHeight; i++) {
+        for (int i = 5; i < Tweaks.chunkHeight; i++) {
             if(Blocks[x, i, z] != BlockType.Air)  continue;
             return i - 1;
         }
         return Tweaks.chunkHeight;
+    }
+
+    public static bool IsBlockInRange(BlockType blockType, RangeInt rangeInt) {
+        return rangeInt.start <= (int) blockType && (int) blockType <= rangeInt.end;
     }
 }
 
 public enum BlockType
 {
     Air,
-    GrassBlock, Dirt,
+    // grass & flower 
     Grass, TallGrass,
-    // flower
     LilyOfTheValley, Dandelion, Poppy, Allium, OxeyeDaisy, WhiteTulip, OrangeTulip, PinkTulip, Peony,
+    
+    GrassBlock, Dirt,
     // stone
     Cobblestone, Stone, SmoothStone, StoneBricks, CrackedStoneBricks, ChiseledStoneBricks,
     Bedrock, Obsidian, Gravel, Andesite, PolishedAndesite, Diorite, PolishedDiorite, Granite, PolishedGranite, Bricks,

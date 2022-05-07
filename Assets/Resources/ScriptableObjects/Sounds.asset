@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b02a7df8791f744e8e969ad889cba8a, type: 3}
+  m_Name: Sounds
+  m_EditorClassIdentifier: 
+  bgm:
+  - {fileID: 8300000, guid: 7350e0b815b9d9b489c5be9ea70909a3, type: 3}
+  - {fileID: 8300000, guid: 1b3e1c54816052d4195af33514824c65, type: 3}
+  - {fileID: 8300000, guid: 4916f1a0f92a9694cac91afa06907d4d, type: 3}
+  - {fileID: 8300000, guid: da02b251b6c8fca49a5cef121dc73dbf, type: 3}
+  - {fileID: 8300000, guid: 7f19a70a99fc48e43889bf15d56b92ab, type: 3}
+  - {fileID: 8300000, guid: 4529a60d5000e114ab4cc76e7ac5a274, type: 3}
+  - {fileID: 8300000, guid: 61016c663d3b3184e832bbd27006b0b3, type: 3}
+  - {fileID: 8300000, guid: f5f981603e009164699d4305676e493c, type: 3}
+  - {fileID: 8300000, guid: 6cccac088c96aeb42b50dd5eea39d0ef, type: 3}
+  - {fileID: 8300000, guid: 1258c61914a287349a4392063de1b42f, type: 3}
+  - {fileID: 8300000, guid: 5f685d5ad6209d746a4ff2781b32c43b, type: 3}
+  - {fileID: 8300000, guid: c924e171add883f43ba4d9e820ebe718, type: 3}
+  - {fileID: 8300000, guid: 1e908d8da7e1207449b62de769219727, type: 3}
+  - {fileID: 8300000, guid: f7faebc56a522164094ab3d84fd40a5c, type: 3}
+  - {fileID: 8300000, guid: aa9f860cf7aa48a4dbd529a4ac1310dd, type: 3}
+  block:
+  - name: Wool
+    blockPlaceAndDigSound:
+    - {fileID: 8300000, guid: 7684a26d1a5d21d4aaf95f92e4af5b03, type: 3}
+    - {fileID: 8300000, guid: 5afa6f1ac9968f64fb79b921b282e6b0, type: 3}
+    - {fileID: 8300000, guid: 9e2c6d1b206025e41b5409f64d75eebe, type: 3}
+    - {fileID: 8300000, guid: 0c0d1cf9a9ec76e4091c998594dece0d, type: 3}
+    blockStepSound:
+    - {fileID: 8300000, guid: dbf8c60760886d541a0406424ef855b0, type: 3}
+    - {fileID: 8300000, guid: 680c4c1d153853c47bfb66ef98b8ccd2, type: 3}
+    - {fileID: 8300000, guid: b7cf252240b028b4ca4221ed3ca053bd, type: 3}
+    - {fileID: 8300000, guid: 76c1fca5f1fb1df4daba1233ea64d79b, type: 3}
+    blockClickSound: []
+    blockBreakSound: []
+  - name: Coral
+    blockPlaceAndDigSound:
+    - {fileID: 8300000, guid: 6991df1ee4576584bab5fa1e58ff90d7, type: 3}
+    - {fileID: 8300000, guid: 44f8f74b2b0e9c643841ee4367c84211, type: 3}
+    - {fileID: 8300000, guid: fc2a742fddb39b64e97d569579390873, type: 3}
+    - {fileID: 8300000, guid: bdaaf580682068641a25e8152db18cda, type: 3}
+    blockStepSound:
+    - {fileID: 8300000, guid: 1832c4e22e44f114484e2815592c4696, type: 3}
+    - {fileID: 8300000, guid: 3168e670b84bf93419edbd019aff52c0, type: 3}
+    - {fileID: 8300000, guid: ef589b8b90840e1498c22b30a69021ee, type: 3}
+    - {fileID: 8300000, guid: 4df0caab7ab0c2543859e8ba66e3d4f3, type: 3}
+    - {fileID: 8300000, guid: c03170144487a4049ad7b8a2f6a5e808, type: 3}
+    - {fileID: 8300000, guid: 41d842374ffcf2241a421f1a2f872670, type: 3}
+    blockClickSound: []
+    blockBreakSound: []
+  - name: Grass
+    blockPlaceAndDigSound:
+    - {fileID: 8300000, guid: 47c7c66855acd014291b4ff6a7dc9783, type: 3}
+    - {fileID: 8300000, guid: 22cef18729bbe5f4699397cf2d5a4ff4, type: 3}
+    - {fileID: 8300000, guid: 798160f0331f2f646a7723cb3a93ae01, type: 3}
+    - {fileID: 8300000, guid: 55eb27fb8839a034eaefa9ac0006cbeb, type: 3}
+    blockStepSound:
+    - {fileID: 8300000, guid: ac663bd0dccb87047a720c762de473fa, type: 3}
+    - {fileID: 8300000, guid: eb0c2d9a259e05349a45494132ffa209, type: 3}
+    - {fileID: 8300000, guid: eb61366fb255f5e468eeccc3df0d37fc, type: 3}
+    - {fileID: 8300000, guid: 83b7b5f419557c6469938c8e1156dd55, type: 3}
+    - {fileID: 8300000, guid: 33968409f797a2c43afdcfd4d168cb02, type: 3}
+    - {fileID: 8300000, guid: e293e9004db2dac4897e5acf1b888cdd, type: 3}
+    blockClickSound: []
+    blockBreakSound: []
+  - name: Gravel
+    blockPlaceAndDigSound:
+    - {fileID: 8300000, guid: 1484c9befbca0bd46a6cc4e13e46754c, type: 3}
+    - {fileID: 8300000, guid: 8a7ed201f78fd4e4d85377dc77716611, type: 3}
+    - {fileID: 8300000, guid: 6cce4f73520ad164bb9c685e12f62c82, type: 3}
+    - {fileID: 8300000, guid: a6c1a1779b72c6d43b1208f811637551, type: 3}
+    blockStepSound:
+    - {fileID: 8300000, guid: 6b566e0d4b486734da85a9a25ac38bab, type: 3}
+    - {fileID: 8300000, guid: a25ec15414339bd4d92097b8c7eb5652, type: 3}
+    - {fileID: 8300000, guid: 27f7121e3312f4249a847e3f34fd8c1e, type: 3}
+    - {fileID: 8300000, guid: 9659e0e7b232eb748ba195e310c7e0f4, type: 3}
+    blockClickSound: []
+    blockBreakSound: []
+  - name: Ladder
+    blockPlaceAndDigSound:
+    - {fileID: 8300000, guid: 1484c9befbca0bd46a6cc4e13e46754c, type: 3}
+    - {fileID: 8300000, guid: 8a7ed201f78fd4e4d85377dc77716611, type: 3}
+    - {fileID: 8300000, guid: 6cce4f73520ad164bb9c685e12f62c82, type: 3}
+    - {fileID: 8300000, guid: a6c1a1779b72c6d43b1208f811637551, type: 3}
+    blockStepSound:
+    - {fileID: 8300000, guid: fa44571e6be2b704cb22eab9f1188b14, type: 3}
+    - {fileID: 8300000, guid: eb3769f5c424af24fa9566f57ab84d1e, type: 3}
+    - {fileID: 8300000, guid: 159c971b698495349aafe2ee08a16a89, type: 3}
+    - {fileID: 8300000, guid: 90095fe3fe741c84c80cf3ff248a9a3c, type: 3}
+    - {fileID: 8300000, guid: 2380434240a7cb043be19d023cb549da, type: 3}
+    blockClickSound: []
+    blockBreakSound: []
+  - name: Sand
+    blockPlaceAndDigSound:
+    - {fileID: 8300000, guid: 6ad27aeff5288904595b496bec83f75a, type: 3}
+    - {fileID: 8300000, guid: 6d726ce0bbe47d24d8d75f046acdf78d, type: 3}
+    - {fileID: 8300000, guid: 482a6418498759042b54eaa115c17ac0, type: 3}
+    - {fileID: 8300000, guid: ce3d28d2069862f4fbb82c6903bd1e2b, type: 3}
+    blockStepSound:
+    - {fileID: 8300000, guid: 5443b11898d4a914aa9a506b8d7eeb76, type: 3}
+    - {fileID: 8300000, guid: ed0646696ba627a4697fa88e3541633b, type: 3}
+    - {fileID: 8300000, guid: 0341f4c754811f844941a2565ea348b4, type: 3}
+    - {fileID: 8300000, guid: 22faefa3335d3e944b9211cb4001e964, type: 3}
+    - {fileID: 8300000, guid: 4de7e6ee27a09e242a18505310f3f96a, type: 3}
+    blockClickSound: []
+    blockBreakSound: []
+  - name: Scaffold
+    blockPlaceAndDigSound: []
+    blockStepSound:
+    - {fileID: 8300000, guid: bd6d3a60f58af974ca5802ba9d2f1c92, type: 3}
+    - {fileID: 8300000, guid: 7b4910de183b0a145a8101f8b967a847, type: 3}
+    - {fileID: 8300000, guid: 030061c36b3d8444bb19ae2e0a702a57, type: 3}
+    - {fileID: 8300000, guid: 3e820422cbdc90849b44903e932f204e, type: 3}
+    - {fileID: 8300000, guid: c6e4833edf0647b459c05548f798dd93, type: 3}
+    - {fileID: 8300000, guid: 9beddc30141c8b34a9c977231c91773b, type: 3}
+    - {fileID: 8300000, guid: d76abf5ecdfa2b54ca0759934b4f1c3a, type: 3}
+    blockClickSound: []
+    blockBreakSound: []
+  - name: Snow
+    blockPlaceAndDigSound:
+    - {fileID: 8300000, guid: aaa4f4fa14e3d0847ac7487332e98beb, type: 3}
+    - {fileID: 8300000, guid: 446139c577861b14ab89bfafda7e0441, type: 3}
+    - {fileID: 8300000, guid: b7237749246a1f241ad6716aecf56dd5, type: 3}
+    - {fileID: 8300000, guid: 646a00e756858b14389d5c59969944f0, type: 3}
+    blockStepSound:
+    - {fileID: 8300000, guid: 10d255a660e6aff43ad1712deba4f30b, type: 3}
+    - {fileID: 8300000, guid: 0f4514ffffb0d9c4b8ed5c90bd833264, type: 3}
+    - {fileID: 8300000, guid: 3155b900b69195a4cb758229fd6a131c, type: 3}
+    - {fileID: 8300000, guid: c32ba66afda604040b4ba81f1361ed41, type: 3}
+    blockClickSound: []
+    blockBreakSound: []
+  - name: Stone
+    blockPlaceAndDigSound:
+    - {fileID: 8300000, guid: 832d90017f807324e8b110b69aa35b77, type: 3}
+    - {fileID: 8300000, guid: 4b630c7aab592c0448f24b19d1470085, type: 3}
+    - {fileID: 8300000, guid: 277d49abfa8bb73409b112eb78f66e6b, type: 3}
+    - {fileID: 8300000, guid: 1f2d296a851dc6c48a7e0888b6d67c9b, type: 3}
+    blockStepSound:
+    - {fileID: 8300000, guid: 8b64b86f9a8bc2d49bae885c0533ec71, type: 3}
+    - {fileID: 8300000, guid: 3996c7c6384fa6849a6d625151ed89ce, type: 3}
+    - {fileID: 8300000, guid: d50dce9a143825349b19bebcb87f3042, type: 3}
+    - {fileID: 8300000, guid: 1dc4f95b3cf6e504a85fd6fc557357ac, type: 3}
+    - {fileID: 8300000, guid: 59c5136a00ed45c429506b32a3a8bb08, type: 3}
+    - {fileID: 8300000, guid: 8cf88e516da180c489c4327df344f3d6, type: 3}
+    blockClickSound: []
+    blockBreakSound: []
+  - name: Wood
+    blockPlaceAndDigSound:
+    - {fileID: 8300000, guid: 7685149798026f04fa920a99b608c24d, type: 3}
+    - {fileID: 8300000, guid: c09782ec1d45ba74c9db29ecffe5b0b6, type: 3}
+    - {fileID: 8300000, guid: 4c20a77e7d9ea95478c61ff01b47b0c3, type: 3}
+    - {fileID: 8300000, guid: f7a342628155b6244bae2545d8184982, type: 3}
+    blockStepSound:
+    - {fileID: 8300000, guid: 1e36530c162372c4395a8dd657f33ca0, type: 3}
+    - {fileID: 8300000, guid: abb2006806e43374eb29cd4372c29fff, type: 3}
+    - {fileID: 8300000, guid: 56db283d2ac0d46468914abaa8d65e98, type: 3}
+    - {fileID: 8300000, guid: 9697f1dfb3dca274daba0c3a418eb636, type: 3}
+    - {fileID: 8300000, guid: 08a765a99109a1045a212d816e0b939f, type: 3}
+    - {fileID: 8300000, guid: c102474cac9ef4940ac8aba807cfde2b, type: 3}
+    blockClickSound:
+    - {fileID: 8300000, guid: a1f5e13410d7a8a4b97c8844fc718d2e, type: 3}
+    blockBreakSound: []
+  - name: Glass
+    blockPlaceAndDigSound: []
+    blockStepSound: []
+    blockClickSound: []
+    blockBreakSound:
+    - {fileID: 8300000, guid: 104a75e42cd42064d8c21f0fa45ed38c, type: 3}
+    - {fileID: 8300000, guid: aa4cb6bae537d9649ba97e06cedf297f, type: 3}
+    - {fileID: 8300000, guid: 4425052e7e1b1ed4fac74de5af674292, type: 3}
