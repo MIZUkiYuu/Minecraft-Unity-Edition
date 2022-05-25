@@ -3,7 +3,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 // ReSharper disable All
 
-public class SolidBlocksMesh1 : MonoBehaviour
+public class SolidBlocksMesh : MonoBehaviour
 {
 
     [HideInInspector]public int dx, dz;

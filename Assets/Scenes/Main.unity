@@ -3631,7 +3631,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 889c797a7d061054285db405b529b273, type: 2}
+  - {fileID: 2100000, guid: 50ff97938d293dd46b922dc4b84de58a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7158,7 +7158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 124.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &856938690
@@ -13088,7 +13088,7 @@ Transform:
   - {fileID: 2101754877}
   - {fileID: 421564640}
   m_Father: {fileID: 1768499671}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1486530663
 MonoBehaviour:
@@ -13102,8 +13102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1024fea469fd1494d856491f82e7c749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: 924534506dccca240b8bc4da54373d96, type: 2}
   cameraPre: {fileID: 2101754879}
   block: {fileID: 421564639}
+  toolbarSlot: {fileID: 363765192}
 --- !u!1 &1488695567
 GameObject:
   m_ObjectHideFlags: 0
@@ -15111,7 +15113,7 @@ RectTransform:
   - {fileID: 686290802}
   - {fileID: 1553786424}
   m_Father: {fileID: 1768499671}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -15359,7 +15361,7 @@ RectTransform:
   m_Children:
   - {fileID: 248852294}
   m_Father: {fileID: 1768499671}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -15913,9 +15915,9 @@ Transform:
   - {fileID: 906556146}
   - {fileID: 983781713}
   - {fileID: 1545306570}
+  - {fileID: 1486530662}
   - {fileID: 1671125499}
   - {fileID: 1682982149}
-  - {fileID: 1486530662}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

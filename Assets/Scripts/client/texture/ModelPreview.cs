@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ModelPreview : MonoBehaviour{
+public class ModelPreview : MonoBehaviour {
+    public Inventory inventory;
     public Camera cameraPre;
     public GameObject block;
+    public Transform toolbarSlot;
+    
     private const int Width = 256;
     private const int Height = 256;
     private RenderTexture _renderTexture;
@@ -12,7 +16,7 @@ public class ModelPreview : MonoBehaviour{
     
     public static readonly Dictionary<BlockType, Texture> BlockTexture2Ds = new();
 
-    private void Awake() {
+    private void Start() {
         _renderTexture = new RenderTexture(Width, Height, 16);
 
         foreach (BlockType blockType in Enum.GetValues(typeof(BlockType))) {
@@ -27,17 +31,12 @@ public class ModelPreview : MonoBehaviour{
             _texture2D.Apply();
             BlockTexture2Ds.Add(blockType, _texture2D);
         }
-    }
-
-    public Texture GetTexture2D(BlockType blockType) {
-        BuildBlockMesh(blockType);
-        _texture2D = new Texture2D(Width, Height);
-        cameraPre.targetTexture = _renderTexture;
-        RenderTexture.active = _renderTexture;
-        cameraPre.Render();
-        _texture2D.ReadPixels(new Rect(0, 0, Width, Height),0, 0);
-        _texture2D.Apply();
-        return _texture2D;
+        
+        //set texture to every item in toolbar
+        for (int i = 0; i < inventory.toolbar.Length; i++) {
+            toolbarSlot.GetChild(i).GetChild(0).GetChild(0).GetComponent<RawImage>().texture = ModelPreview.BlockTexture2Ds[inventory.GetBlockType
+                (InventoryType.Toolbar, i)];
+        }
     }
 
     private void BuildBlockMesh(BlockType blockType) {

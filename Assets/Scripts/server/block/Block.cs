@@ -7,7 +7,7 @@ public static class Block {
     
     public static readonly RangeInt OfWood = new ((int) BlockType.AcaciaPlanks, 24);
     public static readonly RangeInt OfLeaf = new ((int) BlockType.AcaciaLeaves, 6);
-    public static readonly RangeInt OfGlass = new ((int) BlockType.Glass, 17);
+    public static readonly RangeInt OfGlass = new ((int) BlockType.Glass, 16);
     public static readonly RangeInt CanPlant = new ((int) BlockType.Grass, 11);
 
     public static void SetBlock(Vector3 blockPos, BlockType blockType)
@@ -32,6 +32,10 @@ public static class Block {
     
     public static BlockType GetBlock(int x, int y, int z) {
        return Blocks[x, y, z];
+    }
+    
+    public static BlockType GetBlockAbove(Vector3 blockPos) {
+        return Blocks[(int)blockPos.x, (int)blockPos.y + 1, (int)blockPos.z];
     }
     
     public static bool IsBlock(int x, int y, int z, BlockType blockType) {

@@ -23,13 +23,11 @@ public class Tweaks : ScriptableObject {
     public int seed = 0;
     [Tooltip("Maximum number of unilateral chunks")]
     public int maxWorldSize = 210;
+    public int viewDistance = 10;
     
     [Header("---- Chunk ----")]
     public int chunkLength = 16;
     public int chunkHeight = 64;
-
-    [Header("---- Region ----")]
-    public int viewDistance = 10;
 
     [Header("---- Terrain Gen Parameter ----")]
     public float relief = 100;

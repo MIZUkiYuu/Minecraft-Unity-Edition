@@ -160,6 +160,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(keyBinding.attack)) {
             soundsController.PlayAudioClip(GetBlockLookingType(), _blockLookingPos, PlayerBehaviour.Dig);
             Block.SetBlock(_blockLookingPosInArray, BlockType.Air);
+            if (Block.IsBlockInRange(Block.GetBlockAbove(_blockLookingPosInArray), Block.CanPlant)) {
+                Block.SetBlock(_blockLookingPosInArray + Vector3.up, BlockType.Air);
+            }
             RefreshChunkMesh(_blockLookingPos);
         }
     }

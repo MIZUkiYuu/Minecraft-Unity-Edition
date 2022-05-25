@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5706792405376598743}
   - component: {fileID: 5185820895374631695}
   - component: {fileID: 4848055536330476572}
-  - component: {fileID: 84831434544566660}
   m_Layer: 3
   m_Name: SolidChunk
   m_TagString: Untagged
@@ -99,18 +98,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &84831434544566660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5960421763055749845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4584aadce64cc384486240f4d08f0c81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dx: 0
-  dz: 0
-  tweaks: {fileID: 11400000, guid: 25e5f8b8489d5ca489ec1bbe90ad792d, type: 2}

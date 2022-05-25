@@ -20,11 +20,11 @@ MonoBehaviour:
   horizontalSensitivity: 1
   verticalSensitivity: 1
   maxOperateDistance: 6
-  seed: 1
-  maxWorldSize: 3
+  seed: 0
+  maxWorldSize: 21
+  viewDistance: 10
   chunkLength: 16
   chunkHeight: 256
-  viewDistance: 1
   relief: 100
   terrainHeightMax: 128
   xScale: 1

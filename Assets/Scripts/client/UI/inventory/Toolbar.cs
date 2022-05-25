@@ -14,13 +14,9 @@ public class Toolbar : MonoBehaviour {
     private int _frameCount;
     private const float FadeTime = 0.5f;
 
-    private void Awake() {
+    private void Start() {
         inventory.mouseHoldItem = BlockType.Air;
-        //set texture to every item in toolbar
-        for (int i = 0; i < inventory.toolbar.Length; i++) {
-            toolbarSlot.GetChild(i).GetChild(0).GetChild(0).GetComponent<RawImage>().texture = ModelPreview.BlockTexture2Ds[inventory.GetBlockType
-            (InventoryType.Toolbar, i)];
-        }
+
         _frameOriginPos = itemSelectFrame.anchoredPosition.x;
     }
 
@@ -47,7 +43,8 @@ public class Toolbar : MonoBehaviour {
         // press mouse middle key to select block
         if (Input.GetKeyDown(keyBinding.pick)) {
             inventory.SetBlockType(InventoryType.Toolbar, PlayerController.GetBlockLookingType(), inventory.toolbarSelectedItem);
-            toolbarSlot.GetChild(inventory.toolbarSelectedItem).GetChild(0).GetChild(0).GetComponent<RawImage>().texture = ModelPreview.BlockTexture2Ds[inventory.GetBlockType(InventoryType.Toolbar)];
+            toolbarSlot.GetChild(inventory.toolbarSelectedItem).GetChild(0).GetChild(0).GetComponent<RawImage>().texture = ModelPreview
+            .BlockTexture2Ds[inventory.GetBlockType(InventoryType.Toolbar, inventory.toolbarSelectedItem)];
             ShowText();
         }
 

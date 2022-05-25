@@ -36,15 +36,24 @@ public class WorldGen : MonoBehaviour {
     private void WorldBlocksGen() {   // generate the terrain                                                         
         for (int x = 0; x < ChunksTotalLength(); x++) {
             for (int z = 0; z < ChunksTotalLength(); z++) {
-                
-                int y = GetYFromPerlinNoise(x, z) < 5 ? 5 : GetYFromPerlinNoise(x, z);
+
+                int y = GetYFromPerlinNoise(x, z) + 64;
+                int stoneY = GetYFromPerlinNoise(z, x) + 64 - 10 <= y ? GetYFromPerlinNoise(z, x) + 64 - 10 : y;
                 
                 Block.SetBlock(x, y, z, BlockType.GrassBlock);  // the surface
                 
-                for (int i = 0; i < tweaks.chunkHeight; i++)
+                for (int i = 0; i < y; i++)
                 {
-                    if (i <= 4) Block.SetBlock(x, i, z, BlockType.Bedrock);
-                    if (4 < i && i < y) Block.SetBlock(x, i, z, BlockType.Dirt);
+                    switch (i) {
+                        case <= 4:
+                            Block.SetBlock(x, i, z, BlockType.Bedrock);
+                            break;
+                        case > 4 when i < stoneY:
+                            Block.SetBlock(x, i, z, BlockType.Stone);
+                            break;
+                    }
+                    if (stoneY <= i && i < stoneY + 2) Block.SetBlock(x, i, z, BlockType.Gravel);
+                    if (stoneY + 2 <= i && i < y) Block.SetBlock(x, i, z, BlockType.Dirt);
                 }
                 Plant.Generation(x, y + 1, z);
             }
@@ -78,7 +87,8 @@ public class WorldGen : MonoBehaviour {
     }
 
     private static float Astroid(float x) {
-        return Mathf.Pow(1 - Mathf.Pow(1 - x, 1.0f / 2), 2);    //y^(1/2) + x^(1/2) = 1 
+        //y^(1/2) + (1-x)^(1/2) = 1 
+        return Mathf.Pow(1 - Mathf.Pow(1 - x, 1.0f / 2), 2);
     }
     
     private void PlayerSpawn() {
