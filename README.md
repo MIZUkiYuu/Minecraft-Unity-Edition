@@ -11,3 +11,4 @@
 3. Block textures  *91
 4. Generate Terrain randomly  √
 5. Inventory and Toolbar  √
+6. Block placement and destruction sound effects, game BGM  √
