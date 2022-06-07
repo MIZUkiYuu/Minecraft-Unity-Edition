@@ -6,10 +6,8 @@
 **Unity Version: 2020.3.8f1c1**
 
 ## Functions already implemented:
-1. Read data from .json files  √
 
-   but I changed to Unity YAML  √
-2. Player moves  √
-3. Player jumps  -
-4. Block place/destroy/pick
-5. Block textures  -a few
+1. Player moves and jumps √
+2. Block place/destroy/pick  √
+3. Block textures  *91
+4. Generate Terrain randomly  √
