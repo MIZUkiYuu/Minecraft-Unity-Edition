@@ -8,7 +8,7 @@
 
 1. Player moves and jumps √
 2. Block place/destroy/pick  √
-3. Block textures  *91
+3. Block textures  *91  √
 4. Generate Terrain randomly  √
 5. Inventory and Toolbar  √
 6. Block placement and destruction sound effects, game BGM  √
