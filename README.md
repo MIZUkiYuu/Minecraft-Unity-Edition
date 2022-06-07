@@ -11,3 +11,4 @@
 2. Block place/destroy/pick  √
 3. Block textures  *91
 4. Generate Terrain randomly  √
+5. Inventory and Toolbar  √
