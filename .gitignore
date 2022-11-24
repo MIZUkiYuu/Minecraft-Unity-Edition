@@ -60,3 +60,9 @@ crashlytics-build.properties
 
 # Plastic SCM file
 .plastic
+
+/Profiler/
+
+.idea/
+
+ignore.conf
