@@ -1,11 +1,7 @@
-﻿using System.IO;
-using System.Linq;
-using Block.Blocks;
-using Render.Mesh;
+﻿using System;
+using System.Buffers;
 using UnityEditor;
 using UnityEngine;
-using Utilities;
-using FileInfo = Codice.Client.BaseCommands.Fileinfo.FileInfo;
 
 namespace Editor
 {
@@ -14,18 +10,29 @@ namespace Editor
         [MenuItem("Test/Log01", false, 1)]
         private static void Log01()
         {
+            MemoryPool<int> aPool = MemoryPool<int>.Shared;
+            IMemoryOwner<int> a = aPool.Rent(10);
+
+            Debug.Log(a.Memory.Length);
+            foreach (int VARIABLE in a.Memory.Span)
+            {
+                Debug.Log(VARIABLE);
+            }
         }
 
         [MenuItem("Test/Log02", false, 1)]
         private static void Log02()
         {
-            System.IO.FileInfo[] files = new DirectoryInfo(GameAssets.GetBlockTextureDir(BlockType.GrassBlock)).GetFiles("*.png");
+            int[] a = new[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            int b = 0;
 
-            foreach (var v in files)
+            for (int i = 0; i < 4; i++)
             {
-                Debug.Log(v.Name);
+                for (int j = 0; j < 4; j++)
+                {
+                    b = a[i + j];
+                }
             }
         }
-        
     }
 }

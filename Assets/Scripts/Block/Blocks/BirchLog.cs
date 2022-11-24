@@ -1,6 +1,9 @@
-﻿namespace Block.Blocks
+﻿using Render.Mesh;
+
+namespace Block.Blocks
 {
-    public class BirchLog : CubeBlock
+    public class BirchLog : Block
     {
+        public static readonly BlockProperty Property = new() { name = "birch_log", type = BlockType.BirchLog, mesh = BlockMesh.CubeBlock, visibleFace = VisibleFace.NoFace };
     }
 }

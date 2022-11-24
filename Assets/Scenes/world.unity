@@ -295,6 +295,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunksParent: {fileID: 1001851020}
+  WorldData: {fileID: 11400000, guid: 67a758b8514841f45b2b04fef9bdf9e6, type: 2}
+  ChunkPrefab: {fileID: 826979683680017072, guid: 1f2bc32f01ec9414ba16b4a580d60014,
+    type: 3}
 --- !u!1 &878233191
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,8 +471,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.1098353, y: 0.89016, z: -0.31419235, w: 0.3111825}
-  m_LocalPosition: {x: -1.8439194, y: 2.3865979, z: 2.3150315}
+  m_LocalRotation: {x: -0.24779877, y: 0.7465696, z: -0.3795076, w: -0.48703557}
+  m_LocalPosition: {x: 191.37039, y: 291.64047, z: 110.67165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

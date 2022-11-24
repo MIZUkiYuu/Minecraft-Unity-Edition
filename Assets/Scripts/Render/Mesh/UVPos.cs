@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-
-namespace Render.Mesh
+﻿namespace Render.Mesh
 {
     public struct UVPos
     {
-        public Vector2 startPoint;
-        public Vector2 endPoint;
+        public float x0;
+        public float x1;
+        public float y0;
+        public float y1;
     }
 }

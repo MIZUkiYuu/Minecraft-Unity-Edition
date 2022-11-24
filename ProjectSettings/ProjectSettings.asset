@@ -697,11 +697,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 016d774a-2ae6-4f16-91c2-59ff49261742
+  cloudProjectId: 2c7a9619-c3f4-4cc7-9f6e-36775b39a4eb
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Minecraft Unity Edition
+  organizationId: mizukiyuu
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

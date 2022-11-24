@@ -1,29 +1,18 @@
-﻿namespace Render.Mesh
+﻿using Render.Texture;
+
+namespace Render.Mesh
 {
     using UnityEngine;
     using Block;
 
-    public abstract class BlockMesh
+    public class BlockMesh
     {
-        public virtual bool VisualAllFace => false;
-        public virtual VisualFace VisualSomeFace => new();
+        public static readonly BlockMesh None = new();
+        public static readonly CubeBlockMesh CubeBlock = new();
 
-        private readonly VisualFace canVisualAllFace = new()
-        {
-            all = true,
-            right = true,
-            left = true,
-            top = true,
-            down = true,
-            front = true,
-            back = true,
-        };
-
-        /// <summary>
-        /// face must to be rendered.
-        /// </summary>
-        public VisualFace VisualFace => VisualAllFace ? canVisualAllFace : VisualSomeFace;
-
+        public virtual int AllVerticesCount { get; } = 0;
+        public virtual int AllTrianglesCount { get; } = 0;
+        public virtual int AllUVsCount { get; } = 0;
 
         /// <summary>
         /// return the vertices of mesh in order
@@ -32,12 +21,12 @@
         /// <para>3 --- 2</para>
         /// </summary>
         /// <returns></returns>
-        public virtual Vector3[] GetVertices(BlockFace _blockFace, Vector3 _pos)
+        public virtual Vector3[] GetVertices(BlockFace _blockFace, int _x, int _y, int _z)
         {
             return null;
         }
 
-        public virtual Vector3[] GetAllVertices(Vector3 _pos)
+        public virtual Vector3[] GetAllVertices(int _x, int _y, int _z)
         {
             return null;
         }
@@ -78,12 +67,12 @@
         /// <para>3 --- 2</para>
         /// </summary>
         /// <returns></returns>
-        public virtual Vector2[] GetUVs(BlockFace _face)
+        public virtual Vector2[] GetUVs(BlockProperty _block, BlockFace _face)
         {
             return null;
         }
 
-        public virtual Vector2[] GetAllUVs()
+        public virtual Vector2[] GetAllUVs(BlockProperty _block)
         {
             return null;
         }

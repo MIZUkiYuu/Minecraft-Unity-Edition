@@ -25,7 +25,7 @@ namespace Utilities
                 z = Math.Clamp(value.z, min.z, max.z),
             };
         }
-        
+
         /// <summary>
         /// return a new value which value between min and max.
         /// </summary>
@@ -42,7 +42,5 @@ namespace Utilities
                 z = Math.Clamp(value.z, min.z, max.z),
             };
         }
-
     }
-    
 }

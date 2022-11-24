@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: WorldData
   m_EditorClassIdentifier: 
   seed: 5
+  viewDistance: 0

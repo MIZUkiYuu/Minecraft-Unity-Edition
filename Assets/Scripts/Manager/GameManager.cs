@@ -1,17 +1,20 @@
 ﻿using Render.Texture;
 using UnityEngine;
 using World;
+using World.Chunks;
 
 namespace Manager
 {
     public class GameManager : Singleton<GameManager>
     {
-        [Header("chunk")] public Transform chunksParent;
+        public WorldData_SO WorldData;
+
+        [Header("Chunk")] public ChunkPool chunkPool;
         
         private void Start()
         {
-            BlockTexture.Gen();
-            WorldGenerator.GenChunks(chunksParent);
+            BlockTexture.Instance.Gen();
+            WorldGenerator.Instance.GenChunks(WorldData, chunkPool);
         }
     }
 }

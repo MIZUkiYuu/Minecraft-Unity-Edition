@@ -1,6 +1,10 @@
-﻿namespace Block.Blocks
+﻿using Render.Mesh;
+
+namespace Block.Blocks
 {
-    public class GrassBlock : CubeBlock
+    public class GrassBlock : Block
     {
+        public static readonly BlockProperty Property = new() { name = "grass_block", type = BlockType.GrassBlock, mesh = BlockMesh.CubeBlock, visibleFace = VisibleFace.NoFace };
+        
     }
 }
